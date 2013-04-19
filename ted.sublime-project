@@ -1,0 +1,19 @@
+{
+	"folders":
+	[
+		{
+			"path": "."
+		}
+	],
+
+	"build_systems":
+	[
+		{
+			"name": "nodejs",
+			"cmd": ["node", "$file"],
+			"selector": "source.js",
+			"working_dir": "${project_path:${folder:${file_path}}}",
+			"shell": true
+		}
+	]
+}
