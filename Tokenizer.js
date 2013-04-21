@@ -105,6 +105,20 @@ Tokenizer.prototype.feed = function(data) {
 						this.token.contents += x;
 					} else {
 						this.leave();
+						if (this.token.contents == 'true') {
+							this.token.name = 'integer';
+							this.token.contents = true;
+						} else if (this.token.contents == 'false') {
+							this.token.name = 'integer';
+							this.token.contents = false;
+						} else if (this.token.contents == 'undefined') {
+							this.token.name = 'integer';
+							this.token.contents = undefined;
+						} else if (this.token.contents == 'null') {
+							this.token.name = 'integer';
+							this.token.contents = null;
+						}
+						this.puke(this.token);
 						redo = true;
 					}
 					break;
@@ -181,8 +195,10 @@ Tokenizer.prototype.feed = function(data) {
 			}
 		} while (redo);
 	}
+};
 
+Tokenizer.prototype.close = function() {
 	if (this.state != 'root') {
 		errorx(this, 'EOF');
 	}
-};
+}

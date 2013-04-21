@@ -1,3 +1,9 @@
+1
+1.1
+[stringy]
+{}
+{a:[b]}
+
 {
 	id_list: 13 244 518 844 [Unknown ID] 1001
 	score_list: 0.12 53.1 999.981
@@ -22,7 +28,7 @@
 	key3: [Third value\\\[. Thats how its done]
 	object_key: {
 		[String key]: [String value]
-		awesome: nice
+		awesome: [sauce]
 	}
 }
 
