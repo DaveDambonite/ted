@@ -25,8 +25,10 @@ linewhite = function(x) { return x == ' ' || x == '\t'; };
 carriage = function(x) { return x == '\r'; };
 linefeed = function(x) { return x == '\n'; };
 white = function(x) { return linewhite(x) || linefeed(x); };
+dot = function(x) { return x == '.'; }
 identifierStart = function(x) { return /[a-zA-Z_\-]/.test(x); }
 identifier = function(x) { return /[a-zA-Z0-9_\-]/.test(x); }
+numeric = function(x) { return /[0-9]/.test(x); }
 
 errorx = function(tokenizer, x) { throw {
 	message: 'Unexpected character: ' + escape(x), 
@@ -82,6 +84,10 @@ Tokenizer.prototype.feed = function(data) {
 					this.enter('string');
 					this.token = new Token(this, 'string');
 					this.token.depth = 0;
+				} else if (numeric(x)) {
+					this.enter('integer');
+					this.token = new Token(this, 'integer');
+					this.token.contents += x;
 				} else if (white(x)) {
 					// skip
 				} else {
@@ -136,6 +142,43 @@ Tokenizer.prototype.feed = function(data) {
 				} else if (x == 'n') {
 					this.leave();
 					this.token.contents += "\n";
+				} else if (x == 't') {
+					this.leave();
+					this.token.contents += "\t";
+				} else if (x == "\\") {
+					this.leave();
+					this.token.contents += "\\";
+				} else {
+					errorx(this, x);
+				}
+				break;
+
+			case 'integer':
+				if (white(x) || objectOpen(x) || stringOpen(x)) {
+					this.leave();
+					this.token.contents = parseInt(this.token.contents);
+					this.puke(this.token);
+					this.token = undefined;
+				} else if (dot(x)) {
+					this.leave();
+					this.enter('float');
+					this.token.contents += x;
+					this.token.name = 'float';
+				} else if (numeric(x)) {
+					this.token.contents += x;
+				} else {
+					errorx(this, x);
+				}
+				break;
+
+			case 'float':
+				if (white(x) || objectOpen(x) || stringOpen(x)) {
+					this.leave();
+					this.token.contents = parseFloat(this.token.contents);
+					this.puke(this.token);
+					this.token = undefined;
+				} else if (numeric(x)) {
+					this.token.contents += x;
 				} else {
 					errorx(this, x);
 				}

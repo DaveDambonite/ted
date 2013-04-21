@@ -1,5 +1,47 @@
 {
-	key: [The first value
-	] [Another\n \[round?]
-	key2: [Second [va]lue]
+	id_list: 13 244 518 844 [Unknown ID] 1001
+	score_list: 0.12 53.1 999.981
+	true false
+}
+
+{
+	key:
+		[\\aa]
+		[a\\a]
+		[aa\\]
+		[[\\bb]aa]
+		[a[\\bb]a]
+		[aa[\\bb]]
+		[[b\\b]aa]
+		[a[b\\b]a]
+		[aa[b\\b]]
+		[[bb\\]aa]
+		[a[bb\\]a]
+		[aa[bb\\]]
+	key2: [Second \\\\[va]lue]
+	key3: [Third value\\\[. Thats how its done]
+	object_key: {
+		[String key]: [String value]
+		awesome: nice
+	}
+}
+
+
+{
+	name: [ted]
+	scopeName: [source.ted]
+	fileTypes: [ted]
+	patterns:
+		{
+			match: [\\:]
+			name: [keyword.operator.source.ted]
+			comment: [Key/value separator]
+		}{
+			match: [[a-zA-Z_][a-zA-Z0-9_]*]
+			name: [variable.other.source.ted]
+			comment: [
+				Dit is een lange comment die linebreaks over zou moeten nemen
+				Dat wil zeggen dat daar nu een enter tussen staat ojow!
+				En nog een hopsakee]
+		}
 }
