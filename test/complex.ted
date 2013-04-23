@@ -2,7 +2,12 @@
 1.1
 [stringy]
 {}
-{a:[b]}
+
+{[single separator single value]:[1]}
+{[single separator multi value]:[1][2]}
+{[empty array]::}
+{[single value array]::[1]}
+{[multi value array]::[1][2]}
 
 {
 	id_list: 13 244 518 844 [Unknown ID] 1001
@@ -41,7 +46,7 @@
 		{
 			match: [\\:]
 			name: [keyword.operator.source.ted]
-			comment: [Key/value separator]
+			comment:: [Key/value separator]
 		}{
 			match: [[a-zA-Z_][a-zA-Z0-9_]*]
 			name: [variable.other.source.ted]
