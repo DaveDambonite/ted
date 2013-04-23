@@ -1,4 +1,3 @@
-
 var fs = require('fs');
 var util = require('util');
 var path = require('path');
@@ -45,7 +44,7 @@ is.on('end', function() {
 
 		if (argv.output) {
 			fs.writeFileSync(argv.output, output);
-			console.log('Written to "' + output_file + '"')
+			console.log('Written to "' + argv.output + '"')
 		} else {
 			console.log(output);
 		}
