@@ -1,1 +1,1 @@
-node "%~dp0\cli.js" %*
+node "%~dp0cli.js" %*
