@@ -6,18 +6,20 @@ var argv = require('optimist').argv;
 
 // check if an input file is provided
 if (!argv.input) {
-	console.log('Must specify input (-i <filepath> | --input <filepath)');
+	console.log('Must specify input (--input <filepath)');
+	return;
 }
 
-var Token = require('../lib/Token');
-var Tokenizer = require('../lib/Tokenizer');
-var Parser = require('../lib/Parser');
+var Token = require('./lib/Token');
+var Tokenizer = require('./lib/Tokenizer');
+var Parser = require('./lib/Parser');
 
 var is;
 try {
 	is = fs.createReadStream(argv.input, {encoding: 'utf8'});
 } catch (e) {
 	console.error(e);
+	return;
 }
 
 var tokenizer = new Tokenizer();

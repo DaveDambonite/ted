@@ -20,7 +20,7 @@
         "node",
         "ted.js",
         "$file",
-        "$file_path/${file_base_name}.json"
+        "$file_path/${file_base_name}"
       ],
       "selector": "source.ted",
       "working_dir": "${project_path:${folder:${file_path}}}"
