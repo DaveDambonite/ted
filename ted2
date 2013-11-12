@@ -1,0 +1,41 @@
+tab: [tab]
+space: [space]
+
+data: {
+	success: true
+	result: {
+		preferredTabWidth: 2
+		preferredIndentCharacter: tab
+		matrix:
+			(1 2 3)
+			(4 5 6)
+			(7 8 9)
+		data3d: (
+			(000 001 002)
+			(010 011 012)
+			(020 021 022)
+		)(
+			(100 101 102)
+			(110 111 112)
+			(120 121 122)
+		)(
+			(200 201 202)
+			(210 211 212)
+			(220 221 222)
+		)
+	}
+}
+
+/*
+
+0.1
+0.1f
+
+100101b [01]+b
+
+77707o [0-7]+o
+
+FFAFFAx [0-9a-fA-F]+x
+0xFFAFFA 0[xX][0-9a-fA-F]+
+
+*/

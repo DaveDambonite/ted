@@ -11,62 +11,24 @@ Function.prototype.extends = function(parent) {
 	return this;
 };
 
-function Class(name) {
-	this[name] = function C(){
-		if (!(this instanceof C)) { throw Error(''); }
-		console.log(this);
-		if (this.constructor._super) { this.constructor._super.apply(this, arguments); }
-	};
-	return {
-		'name': name,
-		'this': this,
-		'extends': function(parent) {
-			this['this'][this['name']].extends(parent);
-			this.parent = parent;
-			return this;
-		},
-		'constructor': function(constructor) {
-			var c = function C() {
-				if (!(this instanceof C)) { throw Error(''); }
-				if (this.constructor._super) { this.constructor._super.apply(this, arguments); } //???
-				constructor.apply(this, arguments);
-			};
-			if (this.parent) { c.extends(this.parent); }
-			this['this'][this['name']] = c;
-		}
-	};
-}
+Function.prototype.construct = function(instance, arguments) {
+	if (!(instance instanceof this)) { throw Error('Use new when you create an object'); }
+	if (this._super) { this._super.apply(instance, arguments); }
+};
 
-Class('Animal').constructor(function(name) {
-	this.name = name;
-});
-
-/*
 function Animal(name) {
-	if (!(this instanceof Animal)) { return new Animal(name); }
-
+	Animal.construct(this, arguments);
 	this.name = name;
 }
-*/
 
 Animal.prototype.greet = function() {
 	console.log("I'm an animal and my name is " + this.name);
 };
 
-/*
-var Cat = function Cat(name) {
-	if (!(this instanceof Cat)) { return new Cat(name); }
-	this.constructor.__super.apply(this, arguments);
-}.extends(Animal);
-*/
-
-Class('Cat').extends(Animal);
-
-/*
-Cat.prototype.greet = function() {
-	console.log("Meow my name is " + this.name);
-}
-*/
+Cat.extends(Animal);
+function Cat(name) {
+	Cat.construct(this, arguments);
+}; 
 
 var a = new Animal('abe');
 var c = new Cat('meowth');
